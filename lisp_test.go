@@ -1,6 +1,10 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+	"unsafe"
+)
 
 func TestLisp(t *testing.T) {
 	got := []LispValue{1, 2}
@@ -69,5 +73,9 @@ func TestLoop(t *testing.T) {
 func TestPrint(t *testing.T) {
 	code := []LispValue{println_sym, 1, " ", 2, " ", 3}
 	eval(nil, code)
+}
 
+func TestSizes(t *testing.T) {
+	var x int = 1
+	fmt.Printf("%v", unsafe.Sizeof(x))
 }

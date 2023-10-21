@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestParseLisp(t *testing.T) {
+func TestParseLispX(t *testing.T) {
 	testCases := []struct {
 		input     string
 		expected  LispValue
@@ -21,11 +21,12 @@ func TestParseLisp(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("Parsing: %s", tc.input), func(t *testing.T) {
-			result := ParseLisp(tc.input)
+			str := tc.input
+			result := ParseLisp(&str)
 
 			if tc.expectErr {
-				if result != nil {
-					t.Errorf("Expected an error, but got result: %+v", result)
+				if cond, ok := result.(Condition); ok {
+					t.Errorf("Expected an error, but got result: %+v", cond.Error())
 				}
 			} else {
 				if !equal(result, tc.expected) {

@@ -57,8 +57,16 @@ func caddr(v LispValue) LispValue {
 	return nil
 }
 
+type Condition interface {
+	Error() string
+}
+
 type LispCondition struct {
 	error LispValue
+}
+
+func (c LispCondition) Error() string {
+	return fmt.Sprintf("%v", c.error)
 }
 
 type LispGlobalScope struct {
@@ -110,13 +118,13 @@ var lisp LispGlobalScope = LispGlobalScope{}
 var plus_sym = lisp.init_sym("+", add)
 var loop_sym = lisp.init_sym("loop", eval_loop)
 var set_sym = lisp.init_sym("set", eval_set)
-var define_sym = lisp.sym("define")
 var gt_sym = lisp.init_sym(">", _gt)
 var println_sym = lisp.init_sym("println", lisp_println)
 var raise_sym = lisp.init_sym("raise", lisp_raise)
 var quote_sym = lisp.init_sym("quote", quote_macro)
 var error_handler_sym = lisp.init_sym("error-handler", lisp_error_handler)
 var let_sym = lisp.init_sym("let", lisp_let)
+var eval_sym = lisp.init_sym("eval", eval)
 
 func quote_macro(scope *LispScope, code LispValue) LispValue {
 	return cadr(code)

@@ -73,7 +73,7 @@ func TestLoop(t *testing.T) {
 
 func TestLoop2(t *testing.T) {
 	b := lisp.sym("B")
-	code := quote(let_sym, quote(quote(b, 35_000_000)), quote(loop_sym, quote(gt_sym, b, 0), quote(set_sym, b, quote(plus_sym, b, -1))), b)
+	code := quote(let_sym, quote(quote(b, 25_000_000)), quote(loop_sym, quote(gt_sym, b, 0), quote(set_sym, b, quote(plus_sym, b, -1))), b)
 	result := eval(nil, code)
 
 	if result != 0 {

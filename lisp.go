@@ -281,7 +281,6 @@ func eval_progn(scope *LispScope, code LispValue) LispValue {
 		for i := range simple {
 			result = eval(scope, simple[i])
 		}
-		return result
 	}
 
 	return result

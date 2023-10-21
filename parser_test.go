@@ -25,8 +25,8 @@ func TestParseLispX(t *testing.T) {
 			result := ParseLisp(&str)
 
 			if tc.expectErr {
-				if cond, ok := result.(Condition); ok {
-					t.Errorf("Expected an error, but got result: %+v", cond.Error())
+				if _, ok := result.(Condition); !ok {
+					t.Errorf("Expected an error, but got result: %+v", result)
 				}
 			} else {
 				if !equal(result, tc.expected) {
